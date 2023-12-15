@@ -2,7 +2,7 @@ name: 32
 
 on: 
   schedule:
-    - cron: '* */3 * * *'
+    - cron: '* */2 * * *'
   watch:
     types: [started]
   push:
