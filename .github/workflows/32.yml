@@ -1,0 +1,29 @@
+name: 32
+
+on: 
+  schedule:
+    - cron: '* */2 * * *'
+  watch:
+    types: [started]
+  push:
+    branches:
+      - main
+    
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+    - uses: actions/setup-python@v4
+      with:
+        python-version: '3.10' 
+    - run: python 32.py
+    - name: Commit files
+      run: |
+        git config --local user.email "fuongtd@gmail.com"
+        git config --local user.name "fuongtd"
+        git commit -a -m "Add changes"
+    - name: Push changes
+      uses: ad-m/github-push-action@master
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
